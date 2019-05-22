@@ -248,6 +248,7 @@ function bdist_wheel_cmd {
     # https://github.com/warner/python-versioneer/issues/121
     local abs_wheelhouse=$1
     python setup.py bdist_wheel
+	echo "Building the wheel: $abs_wheelhouse"
     cp dist/*.whl $abs_wheelhouse
 }
 
