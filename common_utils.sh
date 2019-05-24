@@ -230,12 +230,14 @@ function build_wheel_cmd {
     if [ -n "$BUILD_DEPENDS" ]; then
         pip install $(pip_opts) $BUILD_DEPENDS
     fi
+	echo "$repo_dir, $wheelhouse"
     (cd $repo_dir && $cmd $wheelhouse)
     repair_wheelhouse $wheelhouse
 }
 
 function pip_wheel_cmd {
     local abs_wheelhouse=$1
+	echo "$abs_wheelhouse"
     pip wheel $(pip_opts) -w $abs_wheelhouse --no-deps .
 }
 
