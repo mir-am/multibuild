@@ -230,14 +230,14 @@ function build_wheel_cmd {
     if [ -n "$BUILD_DEPENDS" ]; then
         pip install $(pip_opts) $BUILD_DEPENDS
     fi
-	echo "$repo_dir, $wheelhouse"
+	echo "build_wheel_cmd: $repo_dir, $wheelhouse"
     (cd $repo_dir && $cmd $wheelhouse)
     repair_wheelhouse $wheelhouse
 }
 
 function pip_wheel_cmd {
     local abs_wheelhouse=$1
-	echo "$abs_wheelhouse"
+	echo "pip_wheel_cmd: $abs_wheelhouse"
     pip wheel $(pip_opts) -w $abs_wheelhouse --no-deps .
 }
 
@@ -248,6 +248,7 @@ function bdist_wheel_cmd {
     # process.  For example, versioneer has problems with versions which are
     # fixed with bdist_wheel:
     # https://github.com/warner/python-versioneer/issues/121
+	echo "Current dir: $(pwd)"
     local abs_wheelhouse=$1
     python setup.py bdist_wheel
 	echo "Building the wheel: $abs_wheelhouse"
@@ -256,7 +257,7 @@ function bdist_wheel_cmd {
 
 function build_pip_wheel {
     # Standard wheel building command with pip wheel
-    build_wheel_cmd "pip_wheel_cmd" $@
+    build_wheel_cmd "bdist_wheel_cmd" $@
 }
 
 function build_bdist_wheel {
