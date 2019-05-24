@@ -38,6 +38,7 @@ function cpython_path {
 function repair_wheelhouse {
     local in_dir=$1
     local out_dir=${2:-$in_dir}
+	echo "In: $in_dir, Out: $out_dir"
     for whl in $in_dir/*.whl; do
         if [[ $whl == *none-any.whl ]]; then  # Pure Python wheel
             if [ "$in_dir" != "$out_dir" ]; then cp $whl $out_dir; fi
