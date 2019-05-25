@@ -115,6 +115,8 @@ function install_run {
     bitness=$([ "$plat" == i686 ] && echo 32 || echo 64)
     local docker_image="matthewbrett/trusty:$bitness"
     docker pull $docker_image
+	echo "$WHEEL_SDIR"
+	ls "$WHEEL_SDIR" -lh
     docker run --rm \
         -e PYTHON_VERSION="$MB_PYTHON_VERSION" \
         -e MB_PYTHON_VERSION="$MB_PYTHON_VERSION" \
